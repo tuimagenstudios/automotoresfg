@@ -20,7 +20,7 @@
 /* ---------- Base ---------- */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:95px}
-body{margin:0;font-family:Manrope,Arial,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+body{margin:0;overflow-x:clip;font-family:Manrope,Arial,sans-serif;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
 button,a,input,select{touch-action:manipulation}
@@ -353,6 +353,52 @@ details[open] summary::after{transform:rotate(45deg)}
 @keyframes vtOut{to{opacity:0;transform:translateY(-14px)}}
 @keyframes vtIn{from{opacity:0;transform:translateY(24px)}}
 
+
+/* =========================================================
+   GESTORÍA DEL AUTOMOTOR · sección propia
+   ========================================================= */
+.gestoria{background:#fff;position:relative;overflow:hidden;border-top:1px solid var(--line)}
+.gestoria::before{content:'';position:absolute;left:-180px;bottom:-220px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,#e3262e12,transparent 65%);pointer-events:none}
+.gest-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:44px;position:relative}
+.gest-intro{max-width:720px}
+.gest-emoji{font-size:15px;letter-spacing:0}
+.gest-text{font-size:14px;line-height:1.85;color:#5c636c;margin:0;max-width:620px}
+.gest-firma{font-size:13px;color:var(--ink);margin:16px 0 0;display:flex;align-items:center;gap:10px}
+.gest-firma::before{content:'';width:26px;height:2px;background:var(--red)}
+.gest-wa{flex:none;background:#1ead57}
+.gest-wa:hover{background:#178f47;box-shadow:0 14px 30px #1ead5755}
+.gest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
+.gest-card{--mx:50%;--my:50%;position:relative;overflow:hidden;display:flex;gap:16px;align-items:flex-start;padding:24px;border-radius:12px;background:var(--paper);border:1px solid #ecece9;
+  transition:transform .55s var(--ease-out),box-shadow .55s,border-color .4s,background .4s}
+.gest-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--ease-out)}
+.gest-card:hover{transform:translateY(-6px);background:#fff;border-color:#e3262e2e;box-shadow:0 24px 50px -24px #10172040}
+.gest-card:hover::after{transform:scaleY(1);transform-origin:top}
+.gest-icon{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;font-size:20px;color:var(--red);background:#fff;border:1px solid #e3262e26;transition:transform .6s var(--ease-spring),background .4s,color .4s}
+.gest-card:hover .gest-icon{transform:rotate(-8deg) scale(1.08);background:var(--red);color:#fff}
+.gest-card h3{font-size:16px;margin:2px 0 6px;letter-spacing:-.2px}
+.gest-card p{font-size:12.5px;line-height:1.7;color:#6b727b;margin:0}
+@keyframes gestIn{from{opacity:0;translate:0 40px}}
+.js .gest-grid:not(.in-view) .gest-card{opacity:0}
+.js .gest-grid.in-view .gest-card{animation:gestIn .8s var(--ease-out) both;animation-delay:calc(var(--i,0) * 80ms)}
+
+/* ---------- Estados del vehículo y extras de la planilla ---------- */
+.badge.reserved{background:#f08c00;animation:none}
+.badge.sold{background:#5b626b;animation:none}
+.card.is-sold .card-photo img{filter:grayscale(.85) brightness(.9)}
+.card.is-sold .card-price{color:#8a9099}
+.no-photo{display:grid;place-items:center;width:100%;height:100%;background:#e9e9e6;color:#8a9099;font-size:12px;letter-spacing:1px}
+.main-photo.no-photo{border-radius:10px;cursor:default}
+.status{display:inline-block;vertical-align:middle;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:6px 10px;border-radius:4px;color:#fff;background:#f08c00}
+.status.sold{background:#5b626b}
+.spec-list{margin:14px 0 4px;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 18px}
+.spec-list li{font-size:12px;padding-left:18px;position:relative}
+.spec-list li::before{content:'✓';position:absolute;left:0;color:var(--red);font-weight:800}
+.empty{grid-column:1/-1;font-size:13px;color:var(--muted)}
+.upper{text-transform:uppercase}
+body:not(.demo) .demo-only{display:none}
+@media(max-width:900px){.gest-grid{grid-template-columns:1fr 1fr}.gest-head{flex-direction:column;align-items:flex-start}}
+@media(max-width:600px){.gest-grid{grid-template-columns:1fr;gap:10px}.gest-card{padding:18px}.spec-list{grid-template-columns:1fr}}
+
 /* =========================================================
    Responsive
    ========================================================= */
@@ -360,6 +406,8 @@ details[open] summary::after{transform:rotate(45deg)}
   .section{padding-left:max(6%,calc((100vw - 1320px)/2));padding-right:max(6%,calc((100vw - 1320px)/2))}
 }
 @media(max-width:1100px){.service-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1080px){nav{gap:20px;font-size:12px}.brand{font-size:14px}}
+@media(max-width:880px){nav{display:none}}
 @media(max-width:900px){
   .brand{font-size:13px}
   .brand small{letter-spacing:2.5px;white-space:nowrap}
@@ -456,7 +504,7 @@ details[open] summary::after{transform:rotate(45deg)}
   *,*::before,*::after{transition:none!important;animation:none!important}
   .js #cards .card,.hero-copy>*{opacity:1!important;translate:none!important;clip-path:none!important}
   .js .visit-front{clip-path:none}
-  .js .service-grid .svc{opacity:1!important;translate:none!important;scale:none!important}
+  .js .service-grid .svc,.js .gest-grid .gest-card{opacity:1!important;translate:none!important;scale:none!important}
   .hero::before,.hero::after{display:none}
   .card{transform:none!important}
   [data-aos]{opacity:1!important;transform:none!important}

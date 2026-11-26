@@ -38,11 +38,11 @@
   const contados = new Set();
   let firma = '';
   const contar = el => {
-    const fin = +el.dataset.valor;
-    if (quieto || !window.anime) return;
+    const fin = +el.dataset.valor, pre = el.dataset.prefijo || '';
+    if (!fin || quieto || !window.anime) return;
     const o = { v: fin * .55 };
     anime.animate(o, { v: fin, duration: 1300, ease: 'outExpo',
-      onUpdate: () => { el.firstChild.nodeValue = '$ ' + Math.round(o.v).toLocaleString('es-AR') + ' '; } });
+      onUpdate: () => { el.firstChild.nodeValue = pre + Math.round(o.v).toLocaleString('es-AR') + ' '; } });
   };
   const prepararTarjetas = () => {
     const lista = $$('.card', cards);
@@ -54,7 +54,8 @@
       c.style.setProperty('--i', i);
       const precio = $('.card-price', c), id = $('[data-save]', c)?.dataset.save;
       if (precio && id) {
-        precio.dataset.valor = precio.textContent.replace(/\D/g, '');
+        precio.dataset.valor = precio.firstChild.nodeValue.replace(/\D/g, '');
+        precio.dataset.prefijo = (precio.firstChild.nodeValue.match(/^[^\d]*/) || [''])[0];
         if (!contados.has(id) && cards.classList.contains('in-view')) { contados.add(id); setTimeout(() => contar(precio), 250 + i * 90); }
       }
     });
@@ -72,7 +73,7 @@
   // inclinación 3D + brillo que sigue al mouse (tarjetas de autos y de servicios)
   if (fino && !quieto) {
     document.addEventListener('pointermove', e => {
-      const c = e.target.closest('.card, .svc'); if (!c) return;
+      const c = e.target.closest('.card, .svc, .gest-card'); if (!c) return;
       const r = c.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
       c.style.setProperty('--mx', x * 100 + '%');
@@ -111,6 +112,8 @@
 
   const grid = $('.service-grid');
   alVer(grid, () => grid.classList.add('in-view'), { threshold: .2 });
+  const gGrid = $('.gest-grid');
+  alVer(gGrid, () => gGrid.classList.add('in-view'), { threshold: .15 });
 
   /* ---- AOS: servicios y títulos que suben ---- */
   if (window.AOS) AOS.init({ once: true, duration: 800, easing: 'ease-out-cubic', offset: 60, disable: quieto });
