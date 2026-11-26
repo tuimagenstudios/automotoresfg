@@ -304,13 +304,13 @@ if (copia?.servicios) renderServicios(copia.servicios);
 route();
 cargarPlanilla();
 
-/* ---------- Fotos que no cargan (link roto o privado) ---------- */
+/* ---------- Fotos que no cargan (link roto, privado o mal subido): fondo negro con el logo ---------- */
+const SIN_FOTO = 'assets/sin-foto.jpg';
 document.addEventListener('error', e => {
-  const im = e.target; if (im.tagName !== 'IMG') return;
-  const mini = im.closest('.thumbs button');
-  if (mini) { const t = mini.parentElement; mini.remove(); if (t.children.length < 2) t.remove(); return; }
-  if (im.id === 'mainPhoto') { const sig = document.querySelector('.thumbs button:not(.active) img'); if (sig && sig.src !== im.src) { im.src = sig.closest('button').dataset.photo; return; } }
-  if (im.closest('.card-photo') || im.id === 'mainPhoto') { const s = document.createElement('span'); s.className = 'no-photo'; s.textContent = 'Foto próximamente'; im.replaceWith(s); }
+  const im = e.target; if (im.tagName !== 'IMG' || im.dataset.respaldo) return;
+  if (!im.closest('.card-photo, .thumbs, #mainPhoto, #comparison, #lightbox, .detail-top, .related') && im.id !== 'mainPhoto') return;
+  im.dataset.respaldo = '1'; im.src = SIN_FOTO; im.alt = 'Foto no disponible · FG Automotores';
+  const b = im.closest('.thumbs button'); if (b) b.dataset.photo = SIN_FOTO;
 }, true);
 
 /* ---------- Video de portada ---------- */
