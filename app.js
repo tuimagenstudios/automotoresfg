@@ -305,7 +305,7 @@ route();
 cargarPlanilla();
 
 /* ---------- Fotos que no cargan (link roto, privado o mal subido): fondo negro con el logo ---------- */
-const SIN_FOTO = 'assets/sin-foto.jpg';
+const SIN_FOTO = 'assets/sin-foto.jpg?v=2';
 document.addEventListener('error', e => {
   const im = e.target; if (im.tagName !== 'IMG' || im.dataset.respaldo) return;
   if (!im.closest('.card-photo, .thumbs, #mainPhoto, #comparison, #lightbox, .detail-top, .related') && im.id !== 'mainPhoto') return;
