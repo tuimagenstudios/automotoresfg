@@ -138,7 +138,7 @@ const agenciaWA = () => waNum(DATOS.whatsapp) || BASE.datos.whatsapp;
 function aplicarDatos(datos) {
   DATOS = { ...BASE.datos, ...Object.fromEntries(Object.entries(datos).filter(([, v]) => v !== '')) };
   demo = si(DATOS['modo demostracion']);
-  document.body.classList.toggle('demo', demo);
+  document.body.classList.toggle('modo-demo', demo);
   $$('[data-campo]').forEach(el => {
     const v = texto(DATOS[el.dataset.campo] ?? '', 400);
     if (v && el.textContent !== v) el.textContent = v;
