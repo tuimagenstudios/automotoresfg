@@ -361,29 +361,42 @@ details[open] summary::after{transform:rotate(45deg)}
 /* =========================================================
    GESTORÍA DEL AUTOMOTOR · sección propia
    ========================================================= */
-.gestoria{background:#fff;position:relative;overflow:hidden;border-top:1px solid var(--line)}
-.gestoria::before{content:'';position:absolute;left:-180px;bottom:-220px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,#e3262e12,transparent 65%);pointer-events:none}
-.gest-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:44px;position:relative}
+.gestoria{background:var(--paper);padding-top:80px;padding-bottom:90px}
+/* panel oscuro propio, separado del contacto */
+.gest-panel{position:relative;overflow:hidden;isolation:isolate;border-radius:26px;padding:56px clamp(24px,5vw,64px) 60px;color:#fff;
+  background:radial-gradient(900px 420px at 100% 0%,#e3262e26,transparent 60%),linear-gradient(160deg,#141f2f,#0b121c);
+  box-shadow:0 40px 80px -40px #0b121caa;border:1px solid #ffffff10}
+.gest-panel::before{content:'';position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(180deg,#000,transparent 75%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%)}
+.gest-panel::after{content:'';position:absolute;left:0;top:0;height:4px;width:140px;background:var(--red);border-radius:0 0 4px 0}
+.gest-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:40px}
 .gest-intro{max-width:720px}
-.gest-emoji{font-size:15px;letter-spacing:0}
-.gest-text{font-size:14px;line-height:1.85;color:#5c636c;margin:0;max-width:620px}
-.gest-firma{font-size:13px;color:var(--ink);margin:16px 0 0;display:flex;align-items:center;gap:10px}
+.gest-intro h2{color:#fff;margin:16px 0 14px}
+.gest-emoji{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:8px;background:#ffffff12;font-size:15px;letter-spacing:0;margin-right:4px}
+.gest-text{font-size:14px;line-height:1.85;color:#aab4c1;margin:0;max-width:620px}
+.gest-firma{font-size:13px;color:#dfe4ea;margin:16px 0 0;display:flex;align-items:center;gap:10px}
 .gest-firma::before{content:'';width:26px;height:2px;background:var(--red)}
 .gest-wa{flex:none;background:#1ead57}
 .gest-wa:hover{background:#178f47;box-shadow:0 14px 30px #1ead5755}
-.gest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;position:relative}
-.gest-card{--mx:50%;--my:50%;position:relative;overflow:hidden;display:flex;gap:16px;align-items:flex-start;padding:24px;border-radius:12px;background:var(--paper);border:1px solid #ecece9;
+.gest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gest-card{--mx:50%;--my:50%;position:relative;overflow:hidden;display:flex;gap:16px;align-items:flex-start;padding:22px;border-radius:14px;
+  background:#ffffff08;border:1px solid #ffffff14;backdrop-filter:blur(6px);
   transition:transform .55s var(--ease-out),box-shadow .55s,border-color .4s,background .4s}
+.gest-card::before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(300px circle at var(--mx) var(--my),#e3262e2e,transparent 60%);opacity:0;transition:opacity .4s}
 .gest-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--ease-out)}
-.gest-card:hover{transform:translateY(-6px);background:#fff;border-color:#e3262e2e;box-shadow:0 24px 50px -24px #10172040}
+.gest-card:hover{transform:translateY(-6px);background:#ffffff0f;border-color:#e3262e55;box-shadow:0 24px 50px -24px #000c}
+.gest-card:hover::before{opacity:1}
 .gest-card:hover::after{transform:scaleY(1);transform-origin:top}
-.gest-icon{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;font-size:20px;color:var(--red);background:#fff;border:1px solid #e3262e26;transition:transform .6s var(--ease-spring),background .4s,color .4s}
-.gest-card:hover .gest-icon{transform:rotate(-8deg) scale(1.08);background:var(--red);color:#fff}
-.gest-card h3{font-size:16px;margin:2px 0 6px;letter-spacing:-.2px}
-.gest-card p{font-size:12.5px;line-height:1.7;color:#6b727b;margin:0}
+.gest-icon{flex:none;display:grid;place-items:center;width:46px;height:46px;border-radius:12px;font-size:20px;color:#fff;background:linear-gradient(145deg,var(--red),var(--red-dark));box-shadow:0 10px 22px -8px #e3262e99;transition:transform .6s var(--ease-spring),border-radius .5s}
+.gest-card:hover .gest-icon{transform:rotate(-8deg) scale(1.08);border-radius:50%}
+.gest-card h3{font-size:16px;margin:2px 0 6px;letter-spacing:-.2px;color:#fff}
+.gest-card p{font-size:12.5px;line-height:1.7;color:#9da7b4;margin:0}
 @keyframes gestIn{from{opacity:0;translate:0 40px}}
 .js .gest-grid:not(.in-view) .gest-card{opacity:0}
 .js .gest-grid.in-view .gest-card{animation:gestIn .8s var(--ease-out) both;animation-delay:calc(var(--i,0) * 80ms)}
+
+/* Botón de WhatsApp del contacto con el logo real */
+.btn-wa{display:grid;place-items:center}
+.btn-wa svg{width:20px;height:20px}
 
 /* ---------- Estados del vehículo y extras de la planilla ---------- */
 .badge.reserved{background:#f08c00;animation:none}
@@ -401,7 +414,7 @@ details[open] summary::after{transform:rotate(45deg)}
 .upper{text-transform:uppercase}
 body:not(.modo-demo) .demo-only{display:none}
 @media(max-width:900px){.gest-grid{grid-template-columns:1fr 1fr}.gest-head{flex-direction:column;align-items:flex-start}}
-@media(max-width:600px){.gest-grid{grid-template-columns:1fr;gap:10px}.gest-card{padding:18px}.spec-list{grid-template-columns:1fr}}
+@media(max-width:600px){.gestoria{padding:50px 4% 60px}.gest-panel{border-radius:20px;padding:38px 20px 26px}.gest-grid{grid-template-columns:1fr;gap:10px}.gest-card{padding:18px}.spec-list{grid-template-columns:1fr}}
 
 /* =========================================================
    Responsive
