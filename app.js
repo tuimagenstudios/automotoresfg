@@ -136,6 +136,7 @@ const agenciaWA = () => waNum(DATOS.whatsapp) || BASE.datos.whatsapp;
 
 /* ---------- Aplicar Datos, Servicios y Gestoría ---------- */
 function aplicarDatos(datos) {
+  if (window.fgTitulo) { window.fgTitulo.revert(); window.fgTitulo = null; } // el título animado vuelve a ser texto normal antes de cambiarlo
   DATOS = { ...BASE.datos, ...Object.fromEntries(Object.entries(datos).filter(([, v]) => v !== '')) };
   demo = si(DATOS['modo demostracion']);
   document.body.classList.toggle('modo-demo', demo);
@@ -305,7 +306,7 @@ route();
 cargarPlanilla();
 
 /* ---------- Fotos que no cargan (link roto, privado o mal subido): fondo negro con el logo ---------- */
-const SIN_FOTO = 'assets/sin-foto.jpg?v=2';
+const SIN_FOTO = 'assets/sin-foto.jpg?v=3';
 document.addEventListener('error', e => {
   const im = e.target; if (im.tagName !== 'IMG' || im.dataset.respaldo) return;
   if (!im.closest('.card-photo, .thumbs, #mainPhoto, #comparison, #lightbox, .detail-top, .related') && im.id !== 'mainPhoto') return;
@@ -314,9 +315,12 @@ document.addEventListener('error', e => {
 }, true);
 // Si una foto tarda más de 6 s (señal lenta o link que no responde), se pone el logo sin esperar el error del navegador
 const FOTOS_AUTOS = '.card-photo img, .thumbs img, #mainPhoto, #comparison img, .related img';
+const vencer = im => setTimeout(() => { if (!im.dataset.respaldo && !(im.complete && im.naturalWidth)) { im.dataset.respaldo = '1'; im.src = SIN_FOTO; } }, 6000);
+// el reloj arranca recién cuando la foto aparece en pantalla (las de abajo cargan al bajar)
+const ojo = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { ojo.unobserve(e.target); vencer(e.target); } }), { rootMargin: '100px' }) : null;
 const vigilar = im => {
   if (im.dataset.vigilada || im.dataset.respaldo) return; im.dataset.vigilada = '1';
-  setTimeout(() => { if (!im.dataset.respaldo && !(im.complete && im.naturalWidth)) { im.dataset.respaldo = '1'; im.src = SIN_FOTO; } }, 6000);
+  if (ojo) ojo.observe(im); else vencer(im);
 };
 new MutationObserver(() => document.querySelectorAll(FOTOS_AUTOS).forEach(vigilar)).observe(document.body, { childList: true, subtree: true });
 document.querySelectorAll(FOTOS_AUTOS).forEach(vigilar);

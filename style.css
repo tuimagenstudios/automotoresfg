@@ -423,7 +423,7 @@ details[open] summary::after{transform:rotate(45deg)}
 .badge.sold{background:#5b626b;animation:none}
 .card.is-sold .card-photo img{filter:grayscale(.85) brightness(.9)}
 .card.is-sold .card-price{color:#8a9099}
-.no-photo{display:block;width:100%;height:100%;min-height:200px;background:#0e0e0e url(assets/sin-foto.jpg?v=2) center/cover no-repeat;color:transparent;font-size:0}
+.no-photo{display:block;width:100%;height:100%;min-height:200px;background:#0e0e0e url(assets/sin-foto.jpg?v=3) center/cover no-repeat;color:transparent;font-size:0}
 .main-photo.no-photo{border-radius:10px;cursor:default}
 .status{display:inline-block;vertical-align:middle;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:6px 10px;border-radius:4px;color:#fff;background:#f08c00}
 .status.sold{background:#5b626b}
@@ -548,10 +548,25 @@ body:not(.modo-demo) .demo-only{display:none}
 }
 
 /* Mientras carga una foto de auto ya se ve el logo de fondo */
-.card-photo img,.main-photo,.thumbs img,#comparison img,.related .card-photo img{background:#0e0e0e url(assets/sin-foto.jpg?v=2) center/cover no-repeat}
+.card-photo img,.main-photo,.thumbs img,#comparison img,.related .card-photo img{background:#0e0e0e url(assets/sin-foto.jpg?v=3) center/cover no-repeat}
 /* Flechita para volver arriba (a la izquierda, el WhatsApp queda a la derecha) */
 .volver-arriba{position:fixed;left:22px;bottom:24px;z-index:60;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#fff;background:#0c131ee6;border:1px solid #ffffff26;box-shadow:0 14px 30px -10px #000c;cursor:pointer;opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:opacity .4s,transform .5s var(--ease-out),background .3s,box-shadow .4s;backdrop-filter:blur(8px)}
 .volver-arriba svg{width:22px;height:22px}
 .volver-arriba.visible{opacity:1;transform:none;pointer-events:auto}
 .volver-arriba:hover{background:var(--red);box-shadow:0 14px 30px -8px #e3262e99}
 @media(max-width:760px){.volver-arriba{left:16px;bottom:18px;width:46px;height:46px}}
+
+/* Portada en celular: el video se ve entero (16:9) arriba y el texto abajo, sin taparlo */
+@media(max-width:600px){
+  .hero{height:auto;display:flex;flex-direction:column;background:#0c131e}
+  .hero video{position:relative;top:0;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;animation:none;display:block}
+  .hero-shade{inset:auto 0 auto 0;top:0;aspect-ratio:16/9;height:auto;background:linear-gradient(0deg,#0c131e 0%,#0c131e00 38%),linear-gradient(90deg,#060c1540,transparent 60%)}
+  .hero-copy{padding:8px 6% 64px;margin-top:-18px}
+  .hero h1{font-size:clamp(40px,12.4vw,52px);letter-spacing:-2px;margin:14px 0 16px}
+  .hero-copy>p:not(.eyebrow){font-size:14px}
+  .hero-bottom{top:calc(56.25vw - 50px);bottom:auto;right:14px}
+  .hero::before{top:calc(56.25vw + 10px)}
+  .hero::after{top:calc(56.25vw + 22px)}
+  .actions,.hero .actions{flex-direction:row;flex-wrap:wrap;align-items:center;gap:14px 18px}
+}
+.pie-col .direccion{display:block;margin:0 0 10px}

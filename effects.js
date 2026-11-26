@@ -123,7 +123,9 @@
   /* ---- Portada: título por líneas, parallax del video al bajar ---- */
   const h1 = $('.hero h1');
   const lineas = SplitText.create(h1, { type: 'lines', mask: 'lines' });
-  gsap.from(lineas.lines, { yPercent: 110, duration: 1.1, stagger: .12, ease: 'expo.out', delay: .25 });
+  window.fgTitulo = lineas; // app.js lo deshace antes de escribir los textos de la planilla
+  gsap.from(lineas.lines, { yPercent: 110, duration: 1.1, stagger: .12, ease: 'expo.out', delay: .25,
+    onComplete: () => { if (window.fgTitulo) { window.fgTitulo.revert(); window.fgTitulo = null; } } });
   gsap.to('.hero video', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   gsap.to('.hero-copy', { y: -60, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 
