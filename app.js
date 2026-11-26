@@ -211,7 +211,15 @@ document.addEventListener('click', e => {
   const thumb = e.target.closest('[data-photo]');
   if (thumb) { $('#mainPhoto').src = thumb.dataset.photo; $$('[data-photo]').forEach(b => b.classList.toggle('active', b === thumb)); }
   if (e.target.id === 'mainPhoto') { $('#lightbox img').src = e.target.src; $('#lightbox').showModal(); }
-  if (e.target.closest('[data-share]')) navigator.clipboard?.writeText(location.href).then(() => toast('Enlace de la ficha copiado')).catch(() => toast('Copiá la dirección de esta ficha desde el navegador'));
+  if (e.target.closest('[data-share]')) {
+    const v = vehicles.find(x => location.hash === '#auto/' + x.id);
+    const titulo = v ? `${v.brand} ${v.name}${v.year ? ' ' + v.year : ''}` : document.title;
+    const msj = v ? `Mirá este ${titulo} en ${texto(DATOS.nombre, 60) || 'FG Automotores'}${v.price ? ' · ' + money(v) : ''}` : titulo;
+    const copiar = () => navigator.clipboard?.writeText(location.href).then(() => toast('Enlace de la ficha copiado')).catch(() => toast('Copiá la dirección de esta ficha desde el navegador'));
+    // En el celular abre el menú de compartir del teléfono (WhatsApp, Instagram, mensajes…); en la compu copia el link
+    if (navigator.share && matchMedia('(pointer: coarse)').matches) navigator.share({ title: titulo, text: msj, url: location.href }).catch(err => { if (err && err.name !== 'AbortError') copiar(); });
+    else copiar();
+  }
   const dc = e.target.closest('[data-detail-compare]'); if (dc) { toggleCompare(dc.dataset.detailCompare); toast('Comparación actualizada'); }
 });
 function toggleCompare(id) { if (comparing.has(id)) comparing.delete(id); else if (comparing.size < 3) comparing.add(id); else toast('Podés comparar hasta 3 vehículos'); render(); }
