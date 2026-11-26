@@ -279,11 +279,12 @@ footer.pie::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .pie nav.pie-col a::after{display:none}
 .pie-col a,.pie-col p{display:block;margin:0 0 10px;color:#9ca4ae;transition:color .3s,transform .4s var(--ease-out)}
 .pie-col a:hover{color:#fff;transform:translateX(4px)}
-.pie-base{max-width:1240px;margin:auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:20px 0 26px;border-top:1px solid #ffffff12;font-size:12px;color:#6c7480}
+.pie-base{max-width:1240px;margin:auto;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;padding:24px 0 110px;border-top:1px solid #ffffff12;font-size:12px;color:#6c7480;text-align:center}
 .pie-credito{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
-.pie-credito a{display:inline-flex;align-items:center;gap:6px;color:#c4cad2;font-weight:600;transition:color .3s}
-.pie-credito a:hover{color:#fff}.pie-credito img{width:18px;height:18px;border-radius:4px}
-@media(max-width:760px){.pie-top{grid-template-columns:1fr 1fr;gap:34px}.pie-marca{grid-column:1/-1}.pie-base{justify-content:center;text-align:center;padding-bottom:96px}}
+.pie-credito{font-size:13px}.pie-credito a{display:inline-flex;align-items:center;gap:7px;color:#fff;font-weight:700;padding:4px 10px;border-radius:999px;background:#ffffff0a;border:1px solid #ffffff14;transition:color .3s,background .3s,border-color .3s}
+.pie-credito a:hover{background:#ffffff14;border-color:#00e0ff66}
+.pie-credito a:hover{color:#fff}.pie-credito img{width:20px;height:20px;border-radius:4px}
+@media(max-width:760px){.pie-top{grid-template-columns:1fr 1fr;gap:34px}.pie-marca{grid-column:1/-1}}
 
 /* ---------- WhatsApp flotante: pastilla oscura con la marca ---------- */
 .whatsapp{position:fixed;bottom:24px;right:24px;z-index:30;display:flex;align-items:center;gap:12px;padding:7px 20px 7px 7px;border-radius:60px;color:#fff;
