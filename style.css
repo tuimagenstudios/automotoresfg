@@ -78,10 +78,10 @@ nav a.ig-btn:hover{color:#fff;border-color:transparent;background:linear-gradien
 @keyframes kenburns{from{transform:scale(1.18)}to{transform:scale(1)}}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#060c15ed 0%,#060c15a6 40%,#060c1515 100%),linear-gradient(0deg,#050a13c9,transparent 40%)}
 /* líneas de velocidad que cruzan la portada */
-.hero::before,.hero::after{content:'';position:absolute;left:0;height:2px;width:38%;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent,var(--red),transparent);opacity:.75;animation:streak 5.5s linear infinite}
-.hero::before{top:72%}
-.hero::after{top:80%;width:22%;background:linear-gradient(90deg,transparent,#ffffffaa,transparent);animation-duration:4s;animation-delay:1.8s;opacity:.45}
-@keyframes streak{from{transform:translateX(-110%)}to{transform:translateX(320%)}}
+.hero::before,.hero::after{content:'';position:absolute;left:0;height:2px;width:34%;z-index:1;pointer-events:none;background:linear-gradient(90deg,transparent,var(--red),transparent);animation:streak 5s linear infinite}
+.hero::before{top:74%}
+.hero::after{top:82%;width:20%;background:linear-gradient(90deg,transparent,#ffffffaa,transparent);animation-duration:3.8s;animation-delay:1.6s;opacity:.5}
+@keyframes streak{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
 
 .hero-copy{position:relative;z-index:2;padding:48px 6% 75px}
 .eyebrow{font-size:10px;letter-spacing:2.5px;font-weight:800;display:flex;gap:10px;align-items:center}
@@ -545,10 +545,3 @@ body:not(.modo-demo) .demo-only{display:none}
   .card{transform:none!important}
   [data-aos]{opacity:1!important;transform:none!important}
 }
-
-/* Rayitas de luz que cruzan la portada (igual que la guía de uso) */
-.hero-shade::before,.hero-shade::after{content:'';position:absolute;left:0;height:2px;pointer-events:none}
-.hero-shade::before{top:74%;width:34%;background:linear-gradient(90deg,transparent,var(--red),transparent);animation:fgStreak 5s linear infinite}
-.hero-shade::after{top:82%;width:20%;background:linear-gradient(90deg,transparent,#ffffffaa,transparent);opacity:.5;animation:fgStreak 3.8s 1.6s linear infinite}
-@keyframes fgStreak{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
-@media (prefers-reduced-motion:reduce){.hero-shade::before,.hero-shade::after{animation:none;display:none}}
