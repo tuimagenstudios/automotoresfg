@@ -283,7 +283,7 @@ footer.pie::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .pie-credito{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .pie-credito a{display:inline-flex;align-items:center;gap:6px;color:#c4cad2;font-weight:600;transition:color .3s}
 .pie-credito a:hover{color:#fff}.pie-credito img{width:18px;height:18px;border-radius:4px}
-@media(max-width:760px){.pie-top{grid-template-columns:1fr 1fr;gap:34px}.pie-marca{grid-column:1/-1}.pie-base{justify-content:center;text-align:center}}
+@media(max-width:760px){.pie-top{grid-template-columns:1fr 1fr;gap:34px}.pie-marca{grid-column:1/-1}.pie-base{justify-content:center;text-align:center;padding-bottom:96px}}
 
 /* ---------- WhatsApp flotante: pastilla oscura con la marca ---------- */
 .whatsapp{position:fixed;bottom:24px;right:24px;z-index:30;display:flex;align-items:center;gap:12px;padding:7px 20px 7px 7px;border-radius:60px;color:#fff;
