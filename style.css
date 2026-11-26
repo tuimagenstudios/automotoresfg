@@ -524,3 +524,10 @@ body:not(.modo-demo) .demo-only{display:none}
   .card{transform:none!important}
   [data-aos]{opacity:1!important;transform:none!important}
 }
+
+/* Rayitas de luz que cruzan la portada (igual que la guía de uso) */
+.hero-shade::before,.hero-shade::after{content:'';position:absolute;left:0;height:2px;pointer-events:none}
+.hero-shade::before{top:74%;width:34%;background:linear-gradient(90deg,transparent,var(--red),transparent);animation:fgStreak 5s linear infinite}
+.hero-shade::after{top:82%;width:20%;background:linear-gradient(90deg,transparent,#ffffffaa,transparent);opacity:.5;animation:fgStreak 3.8s 1.6s linear infinite}
+@keyframes fgStreak{from{transform:translateX(-110%)}to{transform:translateX(330%)}}
+@media (prefers-reduced-motion:reduce){.hero-shade::before,.hero-shade::after{animation:none;display:none}}
