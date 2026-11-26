@@ -263,18 +263,17 @@ footer>a:not(.brand):hover{color:var(--red-2)}
 footer>span{font-size:9px}
 footer .copy{flex-basis:100%;margin:6px 0 0;padding-top:18px;border-top:1px solid #ffffff12;font-size:10px;color:#6c7480;text-align:center;letter-spacing:.5px}
 
-/* ---------- WhatsApp flotante con pulso ---------- */
-.whatsapp{position:fixed;bottom:24px;right:24px;z-index:30;display:flex;align-items:center;gap:0;color:#fff;animation:popIn .7s 1.2s var(--ease-spring) both}
-.wa-icon{position:relative;flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:linear-gradient(145deg,#2fe07a,#1ead57);box-shadow:0 10px 25px -6px #1ead5799,0 2px 6px #0002;transition:transform .45s var(--ease-spring),box-shadow .4s}
-.wa-icon svg{width:30px;height:30px}
-/* aro que late suave */
-.wa-icon::before{content:'';position:absolute;inset:0;border-radius:50%;background:#25d366;z-index:-1;animation:ring 2.8s ease-out infinite}
-/* etiqueta que se despliega */
-.wa-label{max-width:0;overflow:hidden;white-space:nowrap;opacity:0;margin-right:0;padding:11px 0;font-size:12px;font-weight:700;color:var(--ink);background:#fff;border-radius:30px;box-shadow:0 10px 25px -8px #10172040;transition:max-width .5s var(--ease-out),opacity .3s,padding .5s var(--ease-out),margin .5s var(--ease-out)}
-.whatsapp:hover .wa-label,.whatsapp:focus-visible .wa-label{max-width:220px;opacity:1;padding:11px 16px;margin-right:10px}
-.whatsapp:hover .wa-icon{transform:scale(1.08) rotate(-8deg);box-shadow:0 14px 30px -6px #1ead57bb}
-@keyframes ring{from{transform:scale(1);opacity:.55}to{transform:scale(1.55);opacity:0}}
-@keyframes popIn{from{opacity:0;transform:translateY(20px) scale(.6)}}
+/* ---------- WhatsApp flotante: pastilla oscura con la marca ---------- */
+.whatsapp{position:fixed;bottom:24px;right:24px;z-index:30;display:flex;align-items:center;gap:12px;padding:7px 20px 7px 7px;border-radius:60px;color:#fff;
+  background:#0c1118eb;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid #ffffff1f;
+  box-shadow:0 18px 40px -12px #000a;transition:transform .45s var(--ease-spring),box-shadow .4s,border-color .4s;animation:waIn .8s 1.2s var(--ease-out) both}
+.wa-icon{position:relative;flex:none;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#25d366;color:#fff;transition:transform .5s var(--ease-spring)}
+.wa-icon svg{width:24px;height:24px}
+.wa-text{display:flex;flex-direction:column;line-height:1.15;font-size:14px;font-weight:800;letter-spacing:-.2px}
+.wa-text small{font-size:9px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:#8e98a5}
+.whatsapp:hover{transform:translateY(-4px);border-color:#25d36666;box-shadow:0 22px 44px -12px #000c,0 0 0 4px #25d3661f}
+.whatsapp:hover .wa-icon{transform:rotate(-12deg) scale(1.06)}
+@keyframes waIn{from{opacity:0;transform:translateY(30px)}}
 
 /* ---------- Diálogos ---------- */
 dialog{border:0;border-radius:10px;padding:40px;max-width:min(1000px,94vw);width:100%;max-height:90vh;color:var(--ink)}
@@ -433,10 +432,11 @@ details[open] summary::after{transform:rotate(45deg)}
   .related .card:last-child{display:none}
   footer .brand{width:100%}
   footer{font-size:10px}
-  .whatsapp{bottom:16px;right:16px}
-  .wa-icon{width:50px;height:50px}
-  .wa-icon svg{width:27px;height:27px}
-  .wa-label{display:none}
+  .whatsapp{bottom:14px;right:14px;padding:6px 15px 6px 6px;gap:9px}
+  .wa-icon{width:36px;height:36px}
+  .wa-icon svg{width:21px;height:21px}
+  .wa-text{font-size:12.5px}
+  .wa-text small{font-size:8px}
   dialog{padding:40px 18px}
   dialog h2{font-size:27px}
   th,td{font-size:10px;padding:10px 6px}
