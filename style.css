@@ -570,3 +570,9 @@ body:not(.modo-demo) .demo-only{display:none}
   .actions,.hero .actions{flex-direction:row;flex-wrap:wrap;align-items:center;gap:14px 18px}
 }
 .pie-col .direccion{display:block;margin:0 0 10px}
+/* Recuadro oscuro de la ficha: borde de luz roja que gira, como las tarjetas de la home */
+.benefits{--ang:0deg;isolation:isolate}
+@media(max-width:600px){.benefits{position:relative}}
+.benefits::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;z-index:1;pointer-events:none;background:conic-gradient(from var(--ang),transparent 0 62%,var(--red) 82%,#ffb3b6 88%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 6s linear infinite}
+.benefits:hover::before{animation-duration:2.6s}
+@media(prefers-reduced-motion:reduce){.benefits::before{animation:none}}
