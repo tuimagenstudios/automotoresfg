@@ -312,6 +312,23 @@ document.addEventListener('error', e => {
   im.dataset.respaldo = '1'; im.src = SIN_FOTO; im.alt = 'Foto no disponible · FG Automotores';
   const b = im.closest('.thumbs button'); if (b) b.dataset.photo = SIN_FOTO;
 }, true);
+// Si una foto tarda más de 6 s (señal lenta o link que no responde), se pone el logo sin esperar el error del navegador
+const FOTOS_AUTOS = '.card-photo img, .thumbs img, #mainPhoto, #comparison img, .related img';
+const vigilar = im => {
+  if (im.dataset.vigilada || im.dataset.respaldo) return; im.dataset.vigilada = '1';
+  setTimeout(() => { if (!im.dataset.respaldo && !(im.complete && im.naturalWidth)) { im.dataset.respaldo = '1'; im.src = SIN_FOTO; } }, 6000);
+};
+new MutationObserver(() => document.querySelectorAll(FOTOS_AUTOS).forEach(vigilar)).observe(document.body, { childList: true, subtree: true });
+document.querySelectorAll(FOTOS_AUTOS).forEach(vigilar);
+
+/* ---------- Flechita para volver arriba ---------- */
+const arriba = document.createElement('button');
+arriba.className = 'volver-arriba'; arriba.type = 'button'; arriba.setAttribute('aria-label', 'Volver arriba'); arriba.title = 'Volver arriba';
+arriba.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+arriba.addEventListener('click', () => window.scrollTo({ top: 0, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' }));
+document.body.append(arriba);
+let arribaT = false;
+addEventListener('scroll', () => { if (arribaT) return; arribaT = true; requestAnimationFrame(() => { arriba.classList.toggle('visible', scrollY > 700); arribaT = false; }); }, { passive: true });
 
 /* ---------- Video de portada ---------- */
 const video = $('#heroVideo'), toggle = $('#videoToggle');

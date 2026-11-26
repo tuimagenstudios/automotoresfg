@@ -284,6 +284,7 @@ footer.pie::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;
 .pie-credito{font-size:12px}.pie-credito a{display:inline-flex;align-items:center;gap:4px;color:#fff;font-weight:700;font-size:10.5px;padding:1px 6px;border-radius:999px;background:#ffffff0a;border:1px solid #ffffff14;transition:color .3s,background .3s,border-color .3s}
 .pie-credito a:hover{background:#ffffff14;border-color:#00e0ff66}
 .pie-credito a:hover{color:#fff}.pie-credito img{width:12px;height:12px;border-radius:3px}
+.cofrep-logo{font:800 11px/1 Arial,Helvetica,sans-serif;letter-spacing:.02em}.cofrep-logo span:first-child{color:#f3f3f3}.cofrep-logo span:last-child{color:#ffc21a}
 @media(max-width:760px){.pie-top{grid-template-columns:1fr 1fr;gap:34px}.pie-marca{grid-column:1/-1}}
 
 /* ---------- WhatsApp flotante: pastilla oscura con la marca ---------- */
@@ -545,3 +546,12 @@ body:not(.modo-demo) .demo-only{display:none}
   .card{transform:none!important}
   [data-aos]{opacity:1!important;transform:none!important}
 }
+
+/* Mientras carga una foto de auto ya se ve el logo de fondo */
+.card-photo img,.main-photo,.thumbs img,#comparison img,.related .card-photo img{background:#0e0e0e url(assets/sin-foto.jpg?v=2) center/cover no-repeat}
+/* Flechita para volver arriba (a la izquierda, el WhatsApp queda a la derecha) */
+.volver-arriba{position:fixed;left:22px;bottom:24px;z-index:60;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:#fff;background:#0c131ee6;border:1px solid #ffffff26;box-shadow:0 14px 30px -10px #000c;cursor:pointer;opacity:0;transform:translateY(16px) scale(.9);pointer-events:none;transition:opacity .4s,transform .5s var(--ease-out),background .3s,box-shadow .4s;backdrop-filter:blur(8px)}
+.volver-arriba svg{width:22px;height:22px}
+.volver-arriba.visible{opacity:1;transform:none;pointer-events:auto}
+.volver-arriba:hover{background:var(--red);box-shadow:0 14px 30px -8px #e3262e99}
+@media(max-width:760px){.volver-arriba{left:16px;bottom:18px;width:46px;height:46px}}
