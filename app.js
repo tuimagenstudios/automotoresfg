@@ -302,6 +302,15 @@ if (copia?.servicios) renderServicios(copia.servicios);
 route();
 cargarPlanilla();
 
+/* ---------- Fotos que no cargan (link roto o privado) ---------- */
+document.addEventListener('error', e => {
+  const im = e.target; if (im.tagName !== 'IMG') return;
+  const mini = im.closest('.thumbs button');
+  if (mini) { const t = mini.parentElement; mini.remove(); if (t.children.length < 2) t.remove(); return; }
+  if (im.id === 'mainPhoto') { const sig = document.querySelector('.thumbs button:not(.active) img'); if (sig && sig.src !== im.src) { im.src = sig.closest('button').dataset.photo; return; } }
+  if (im.closest('.card-photo') || im.id === 'mainPhoto') { const s = document.createElement('span'); s.className = 'no-photo'; s.textContent = 'Foto próximamente'; im.replaceWith(s); }
+}, true);
+
 /* ---------- Video de portada ---------- */
 const video = $('#heroVideo'), toggle = $('#videoToggle');
 const setToggle = (txt, label) => { toggle.textContent = txt; toggle.setAttribute('aria-label', label); toggle.title = label; };
